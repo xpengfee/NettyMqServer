@@ -87,7 +87,7 @@ public class NettyMqServer {
 	}
 
 	public void doStart() {
-		int port = 18866;
+		int port = 7397;
 		try {
 			start(port);
 		} catch (Exception e) {

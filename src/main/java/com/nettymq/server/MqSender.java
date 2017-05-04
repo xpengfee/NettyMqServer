@@ -21,6 +21,6 @@ public class MqSender {
 	}
 
 	public void send(String data) {
-		rabbitTemplate.convertAndSend("NettyMqServerSenderExchange", "", data);
+		rabbitTemplate.convertAndSend("NettyMqServerExchange", "mq", data);
 	}
 }

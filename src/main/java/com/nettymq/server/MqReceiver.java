@@ -18,17 +18,19 @@ import org.slf4j.LoggerFactory;
 public class MqReceiver {
 	private static final Logger log = LoggerFactory.getLogger(MqReceiver.class);
 	private ConnectionFactory connnectionFactory;
-	private String exchangeName = "NettyMqServerListenerExchange";
-	private String queueName = "MqListenerQueue";
-	private String routeKey = "mqListener";
+	//private String exchangeName = "NettyMqServerListenerExchange";
+	private String exchangeName = "NettyMqServerExchange1";
+	//private String queueName = "MqListenerQueue";
+	private String queueName = "MqQueue";
+	private String routeKey = "mq";
 
 	private Thread listenThread;
 
 	public MqReceiver() {
 		connnectionFactory = new ConnectionFactory();
-		connnectionFactory.setHost("192.8.125.202");
-		connnectionFactory.setUsername("guest");
-		connnectionFactory.setPassword("guest");
+		connnectionFactory.setHost("172.16.8.168");
+		connnectionFactory.setUsername("RabbitAdmin");
+		connnectionFactory.setPassword("RabbitAdmin");
 		connnectionFactory.setPort(5672);
 		connnectionFactory.setVirtualHost("/");
 	}
@@ -40,8 +42,8 @@ public class MqReceiver {
 				try {
 					Connection connection = connnectionFactory.newConnection();
 					final Channel channel = connection.createChannel();
-					channel.exchangeDeclare(exchangeName, "direct", true,
-							false, null);
+					//channel.exchangeDeclare(exchangeName, "direct", true,false, null);
+					channel.exchangeDeclare(exchangeName, "fanout", true,false, null);
 					channel.queueDeclare(queueName, true, false, false, null);
 					channel.queueBind(queueName, exchangeName, routeKey);
 

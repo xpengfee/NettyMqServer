@@ -13,7 +13,7 @@
         http://www.springframework.org/schema/beans/spring-beans-3.2.xsd">  
 
 	<!-- RabbitMQ Connection Config  --> 
-    <rabbit:connection-factory id="connectionFactory" host="192.8.125.202" username="guest" password="guest" 
+    <rabbit:connection-factory id="connectionFactory" host="172.16.8.168" username="RabbitAdmin" password="RabbitAdmin"
     port="5672" virtual-host="/" />
     <rabbit:admin connection-factory="connectionFactory"/>
     
@@ -32,13 +32,14 @@
     
     <!-- RabbitMQ Sender Config  --> 
     <rabbit:template id="messageSender" connection-factory="connectionFactory"/>
-    <rabbit:queue name="fanoutMsgQueue" durable="true" exclusive="false" auto-delete="false"/>
-    <rabbit:fanout-exchange name="NettyMqServerSenderExchange" durable="true" auto-delete="false">
+    <rabbit:queue name="MqQueue" durable="true" exclusive="false" auto-delete="false"/>
+    <rabbit:fanout-exchange name="NettyMqServerExchange1" durable="true" auto-delete="false">
     	<!-- The receiver queue bind to the exchange  --> 
-        <!-- <rabbit:bindings>
-            <rabbit:binding queue="fanoutMsgQueue"/>
-        </rabbit:bindings> -->
+         <rabbit:bindings>
+            <rabbit:binding queue="MqQueue"/>
+        </rabbit:bindings>
     </rabbit:fanout-exchange>
+
     
 </beans>
 
