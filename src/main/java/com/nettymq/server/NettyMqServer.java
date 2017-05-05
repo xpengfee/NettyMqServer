@@ -68,8 +68,8 @@ public class NettyMqServer {
 		// Another way to start a MQ listener, just use the rabbit mq java
 		// client API
 		// Manually ack to MQ server if one message is consumed.
-		MqReceiver mqReceiver = new MqReceiver();
-		mqReceiver.start();
+		/*MqReceiver mqReceiver = new MqReceiver();
+		mqReceiver.start();*/
 	}
 
 	private void stop() {
